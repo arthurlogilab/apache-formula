@@ -9,7 +9,7 @@
     'port': site.get('port', '80'),
 
     'ServerName': sitename,
-    'ServerAlias': site.get('ServerAlias', ''),
+    'ServerAlias': site.get('ServerAlias', 'www.{0}'.format(sitename)),
 
     'ServerAdmin': site.get('ServerAdmin', 'webmaster@{0}'.format(sitename)),
 
@@ -20,7 +20,7 @@
     'LogLevel': site.get('LogLevel', 'warn'),
     'ErrorLog': site.get('ErrorLog', '{0}/{1}-error.log'.format(map.logdir, sitename)),
     'LogFormat': site.get('LogFormat', '"%h %l %u %t \\\"%r\\\" %>s"'),
-    'CustomLog': site.get('CustomLog', '{0}/{1}-access.log'.format(map.logdir, sitename)),
+    'CustomLog': site.get('CustomLog', '{0}/{1}-access.log combined'.format(map.logdir, sitename)),
 
     'DocumentRoot': site.get('DocumentRoot', '{0}/{1}'.format(map.wwwdir, sitename)),
     'VirtualDocumentRoot': site.get('VirtualDocumentRoot'),
@@ -56,7 +56,7 @@
     {% if site.get('LogLevel') != False -%}LogLevel {{ vals.LogLevel }}{% endif %}
     {% if site.get('ErrorLog') != False -%}ErrorLog {{ vals.ErrorLog }}{% endif %}
     {% if site.get('LogFormat') != False -%}LogFormat {{ vals.LogFormat }}{% endif %}
-    {% if site.get('CustomLog') != False -%}CustomLog {{ vals.CustomLog }}  {{ vals.LogFormat }}{% endif %}
+    {% if site.get('CustomLog') != False -%}CustomLog {{ vals.CustomLog }} {% endif %}
 
     {% if site.get('DocumentRoot') != False -%}DocumentRoot {{ vals.DocumentRoot }}{% endif %}
     {% if site.get('VirtualDocumentRoot') -%}VirtualDocumentRoot {{ vals.VirtualDocumentRoot }}{% endif %}
